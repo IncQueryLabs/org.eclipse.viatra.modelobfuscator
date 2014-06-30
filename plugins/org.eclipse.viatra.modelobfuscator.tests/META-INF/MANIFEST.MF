@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: VIATRA Model Obfuscator Tests
+Bundle-SymbolicName: org.eclipse.viatra.modelobfuscator.tests
+Bundle-Version: 0.7.0.qualifier
+Bundle-Vendor: Eclipse VIATRA Project
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.viatra.modelobfuscator.runtime;bundle-version="0.7.0",
+ org.junit,
+ org.eclipse.xtend.lib,
+ com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.emf.ecore,
+ org.eclipse.incquery.examples.bpm
+

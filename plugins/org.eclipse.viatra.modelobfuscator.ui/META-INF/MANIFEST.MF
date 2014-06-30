@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMF-IncQuery Model Obfuscator UI
+Bundle-SymbolicName: org.eclipse.viatra.modelobfuscator.ui;singleton:=true
+Bundle-Version: 0.7.0.qualifier
+Bundle-Activator: org.eclipse.viatra.modelobfuscator.ui.ModelObfuscatorUIPlugin
+Bundle-Vendor: Eclipse VIATRA Project
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.viatra.modelobfuscator.runtime;bundle-version="0.7.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.edit,
+ org.eclipse.emf.transaction
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
