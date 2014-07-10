@@ -180,7 +180,7 @@
         </property>
       </activation>
       <modules>
-        <module>../../maven/viatra-modelobfucator-runtime</module>
+        <module>../../maven/viatra-modelobfuscator-runtime</module>
       </modules>
     </profile>
   </profiles>
