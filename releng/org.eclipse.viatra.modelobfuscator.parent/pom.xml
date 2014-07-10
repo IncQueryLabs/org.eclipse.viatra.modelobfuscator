@@ -155,6 +155,18 @@
       </plugins>
     </pluginManagement>
   </build>
+  <distributionManagement>
+    <repository>
+      <id>repo.eclipse.org</id>
+      <name>VIATRA Project Repository - Releases</name>
+      <url>https://repo.eclipse.org/content/repositories/viatra2-releases/</url>
+    </repository>
+    <snapshotRepository>
+      <id>repo.eclipse.org</id>
+      <name>VIATRA Project Repository - Snapshots</name>
+      <url>https://repo.eclipse.org/content/repositories/viatra2-snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
   <profiles>
     <profile>
       <id>eclipse_tooling</id>
