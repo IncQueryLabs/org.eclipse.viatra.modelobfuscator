@@ -11,10 +11,6 @@
   <packaging>pom</packaging>
   <modules>
     <module>../../plugins/org.eclipse.viatra.modelobfuscator.runtime</module>
-    <module>../../plugins/org.eclipse.viatra.modelobfuscator.ui</module>
-    <!-- Needs BPM example metamodel as dependency
-    <module>../../plugins/org.eclipse.viatra.modelobfuscator.tests</module>
-      -->
     
     <module>../../releng/org.eclipse.viatra.modelobfuscator.target</module>
   </modules>
@@ -168,6 +164,10 @@
         </property>
       </activation>
       <modules>
+	      <module>../../plugins/org.eclipse.viatra.modelobfuscator.ui</module>
+		    <!-- Needs BPM example metamodel as dependency
+		    <module>../../plugins/org.eclipse.viatra.modelobfuscator.tests</module>
+		      -->
         <module>../../features/org.eclipse.viatra.modelobfuscator.feature</module>
         <module>../../releng/org.eclipse.viatra.modelobfuscator.update</module>
       </modules>
