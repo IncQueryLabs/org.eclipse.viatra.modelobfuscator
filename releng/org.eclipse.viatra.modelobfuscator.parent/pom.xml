@@ -184,7 +184,7 @@
       </modules>
     </profile>
   </profiles>
-  <pluginRepositories>
+  <!-- <pluginRepositories>
     <pluginRepository>
       <id>incquery-snapshots</id>
       <snapshots>
@@ -212,6 +212,7 @@
       <url>https://repo.eclipse.org/content/repositories/emf-incquery-releases/</url>
     </repository>
   </repositories>
+   -->
   <scm>
     <connection>${tycho.scmUrl}</connection>
     <url>http://git.eclipse.org/c/viatra2/org.eclipse.viatra.modelobfuscator.git/</url>
