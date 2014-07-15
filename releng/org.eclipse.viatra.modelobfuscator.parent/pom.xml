@@ -177,11 +177,13 @@
       </activation>
       <modules>
 	      <module>../../plugins/org.eclipse.viatra.modelobfuscator.ui</module>
+	      <module>../../plugins/org.eclipse.viatra.modelobfuscator.application</module>
 		    <!-- Needs BPM example metamodel as dependency
 		    <module>../../plugins/org.eclipse.viatra.modelobfuscator.tests</module>
 		      -->
         <module>../../features/org.eclipse.viatra.modelobfuscator.feature</module>
         <module>../../releng/org.eclipse.viatra.modelobfuscator.update</module>
+        <module>../../releng/org.eclipse.viatra.modelobfuscator.product</module>
       </modules>
     </profile>
     <profile>

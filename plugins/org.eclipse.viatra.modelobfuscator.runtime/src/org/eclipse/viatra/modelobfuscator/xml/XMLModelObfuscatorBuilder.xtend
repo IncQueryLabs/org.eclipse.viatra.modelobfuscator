@@ -95,6 +95,14 @@ class XMLModelObfuscatorBuilder {
     return this
   }
   
+  def getSeed(){
+    return seedString
+  }
+  
+  def getSalt(){
+    return saltString
+  }
+  
   /**
    * Returns the {@link XMLModelObfuscator} instance built using the current configuration of the builder. 
    */

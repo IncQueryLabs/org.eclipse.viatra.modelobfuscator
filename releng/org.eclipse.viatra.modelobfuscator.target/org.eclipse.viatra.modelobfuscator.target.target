@@ -16,6 +16,7 @@
     <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
       <unit id="org.eclipse.platform.sdk" version="3.7.2.M20120208-0800"/>
       <unit id="org.eclipse.sdk.ide" version="3.7.2.M20120208-0800"/>
+      <unit id="org.eclipse.equinox.sdk.feature.group" version="3.7.1.R37x_v20110907-7M7W8i8eNV4WsRkue-4Vq4J6pCyW"/>
       <repository location="http://download.eclipse.org/eclipse/updates/3.7"/>
     </location>
     <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">

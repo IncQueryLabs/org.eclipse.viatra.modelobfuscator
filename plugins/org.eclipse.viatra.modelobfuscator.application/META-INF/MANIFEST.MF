@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: VIATRA Model Obfuscator Headless
+Bundle-SymbolicName: org.eclipse.viatra.modelobfuscator.application;singleton:=true
+Bundle-Version: 0.7.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.runtime,
+ com.google.guava,
+ org.eclipse.viatra.modelobfuscator.runtime
