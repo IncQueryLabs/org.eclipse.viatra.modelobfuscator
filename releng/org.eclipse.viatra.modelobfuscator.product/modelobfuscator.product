@@ -42,7 +42,6 @@
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.osgi"/>
-      <plugin id="org.eclipse.osgi.compatibility.state" fragment="true"/>
       <plugin id="org.eclipse.viatra.modelobfuscator.application" version="0.7.0.qualifier"/>
       <plugin id="org.eclipse.viatra.modelobfuscator.runtime" version="0.7.0.qualifier"/>
       <plugin id="org.eclipse.xtend.lib"/>
