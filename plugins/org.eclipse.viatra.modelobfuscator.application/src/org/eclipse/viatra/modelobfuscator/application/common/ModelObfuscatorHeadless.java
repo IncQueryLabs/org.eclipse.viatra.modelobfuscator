@@ -23,6 +23,7 @@ import java.util.NoSuchElementException;
 import java.util.Properties;
 import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.concurrent.TimeUnit;
 
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.viatra.modelobfuscator.xml.XMLModelObfuscator;
@@ -30,6 +31,7 @@ import org.eclipse.viatra.modelobfuscator.xml.XMLModelObfuscatorBuilder;
 import org.eclipse.viatra.modelobfuscator.xml.XMLSchemaConfiguration;
 
 import com.google.common.base.Optional;
+import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Maps;
@@ -167,35 +169,6 @@ public class ModelObfuscatorHeadless {
         return IApplication.EXIT_OK;
     }
 
-    /**
-     * @param outputDirectory
-     * @param inputs
-     * @param obfuscatorBuilder
-     */
-    private void performObfuscation(File outputDirectory, Map<String, FileInputStream> inputs,
-            XMLModelObfuscatorBuilder obfuscatorBuilder) {
-        for (Entry<String, FileInputStream> input : inputs.entrySet()) {
-            BufferedInputStream bufferedInputStream = new BufferedInputStream(input.getValue());
-            obfuscatorBuilder.setInput(bufferedInputStream);
-            String fileName = input.getKey();
-            File output = new File(outputDirectory, fileName);
-            BufferedOutputStream bufferedOutputStream;
-            try {
-                bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(output));
-                obfuscatorBuilder.setOutput(bufferedOutputStream);
-                XMLModelObfuscator obfuscator = obfuscatorBuilder.build();
-                System.out.println("Obfuscating " + fileName);
-                obfuscator.obfuscate();
-                bufferedOutputStream.close();
-                bufferedInputStream.close();
-            } catch (FileNotFoundException e) {
-                reportError("Could not ouput to file " + output.getPath());
-            } catch (IOException e) {
-                reportError("Could not close output file " + output.getPath());
-            }
-        }
-    }
-
     private Properties loadConfigurationPropertyFile(String configPath) throws FileNotFoundException, IOException {
         Properties bundle = new Properties();
         FileInputStream fis = new FileInputStream(configPath);
@@ -306,6 +279,38 @@ public class ModelObfuscatorHeadless {
         
         XMLSchemaConfiguration schemaConfiguration = new XMLSchemaConfiguration(attributeMultimap, tagSet);
         return schemaConfiguration;
+    }
+
+    /**
+     * @param outputDirectory
+     * @param inputs
+     * @param obfuscatorBuilder
+     */
+    private void performObfuscation(File outputDirectory, Map<String, FileInputStream> inputs,
+            XMLModelObfuscatorBuilder obfuscatorBuilder) {
+        for (Entry<String, FileInputStream> input : inputs.entrySet()) {
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(input.getValue());
+            obfuscatorBuilder.setInput(bufferedInputStream);
+            String fileName = input.getKey();
+            File output = new File(outputDirectory, fileName);
+            BufferedOutputStream bufferedOutputStream;
+            try {
+                bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(output));
+                obfuscatorBuilder.setOutput(bufferedOutputStream);
+                XMLModelObfuscator obfuscator = obfuscatorBuilder.build();
+                System.out.println("Obfuscating " + fileName);
+                Stopwatch stopwatch = Stopwatch.createStarted();
+                obfuscator.obfuscate();
+                stopwatch.stop();
+                System.out.println("Obfuscation finished in: " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms (" + stopwatch.elapsed(TimeUnit.NANOSECONDS) + " ns)");
+                bufferedOutputStream.close();
+                bufferedInputStream.close();
+            } catch (FileNotFoundException e) {
+                reportError("Could not ouput to file " + output.getPath());
+            } catch (IOException e) {
+                reportError("Could not close output file " + output.getPath());
+            }
+        }
     }
 
     /**
