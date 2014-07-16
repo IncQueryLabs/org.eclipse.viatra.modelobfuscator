@@ -94,8 +94,8 @@
       <plugin id="org.eclipse.ui"/>
       <plugin id="org.eclipse.ui.trace"/>
       <plugin id="org.eclipse.ui.workbench"/>
-      <plugin id="org.eclipse.viatra.modelobfuscator.application"/>
-      <plugin id="org.eclipse.viatra.modelobfuscator.runtime"/>
+      <plugin id="org.eclipse.viatra.modelobfuscator.application" version="0.7.0.qualifier"/>
+      <plugin id="org.eclipse.viatra.modelobfuscator.runtime" version="0.7.0.qualifier"/>
       <plugin id="org.eclipse.xtend.lib"/>
       <plugin id="org.eclipse.xtext.xbase.lib"/>
       <plugin id="org.w3c.css.sac"/>
