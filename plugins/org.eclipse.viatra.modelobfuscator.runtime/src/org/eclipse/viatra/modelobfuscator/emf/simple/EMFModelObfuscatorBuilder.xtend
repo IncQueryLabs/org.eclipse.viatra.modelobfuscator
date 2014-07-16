@@ -75,6 +75,14 @@ class EMFModelObfuscatorBuilder {
     return this
   }
 
+  def getSeed(){
+    return seedString
+  }
+  
+  def getSalt(){
+    return saltString
+  }
+
   /**
    * Sets the seed used for obfuscating String values.
    * See {@link StringObfuscator} for details.

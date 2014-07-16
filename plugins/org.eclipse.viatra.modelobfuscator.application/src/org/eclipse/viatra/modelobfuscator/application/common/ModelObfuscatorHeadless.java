@@ -17,6 +17,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
@@ -25,7 +26,18 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.BasicExtendedMetaData;
+import org.eclipse.emf.ecore.util.ExtendedMetaData;
+import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.equinox.app.IApplication;
+import org.eclipse.viatra.modelobfuscator.emf.simple.EMFModelObfuscatorBuilder;
+import org.eclipse.viatra.modelobfuscator.emf.simple.SimpleEMFModelObfuscator;
 import org.eclipse.viatra.modelobfuscator.xml.XMLModelObfuscator;
 import org.eclipse.viatra.modelobfuscator.xml.XMLModelObfuscatorBuilder;
 import org.eclipse.viatra.modelobfuscator.xml.XMLSchemaConfiguration;
@@ -34,6 +46,7 @@ import com.google.common.base.Optional;
 import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
@@ -119,54 +132,233 @@ public class ModelObfuscatorHeadless {
         String mode = getPropertyValue(configuration, OBFUSCATION_MODE_PROPERTY);
         
         if(mode.equals(EMF_OBFUSCATION_MODE)) {
-            // TODO handle EMF obfuscation
             
-            // check input file existence
-
-            // ensure output directory existence
-            
-            // load ecore models into registry
-            
-            // load inputs into resource set
-            
-            // initialize obfuscator
-            
-            // perform obfuscation
-            
-            // save models to output directory
+            performEMFObfuscation(seed, salt, configuration);
             
         } else if(mode.equals(XML_OBFUSCATION_MODE)) {
 
-            // ensure output directory existence
-            File outputDirectory = checkOutputDirectory(configuration);
-            
-            // check input file existence
-            Map<String,FileInputStream> inputs = Maps.newHashMap();
-            prepareInputStreams(configuration, inputs);
-            
-            // parse schema configuration
-            XMLSchemaConfiguration schemaConfiguration = prepareSchemaConfiguration(configuration);
-            
-            // initialize obfuscator
-            XMLModelObfuscatorBuilder obfuscatorBuilder = XMLModelObfuscatorBuilder.create().setSchemaConfiguration(schemaConfiguration);
-            
-            if(seed != null) {
-                obfuscatorBuilder.setSeed(seed);
-            }
-            System.out.println("Obfuscating using seed: " + obfuscatorBuilder.getSeed());
-            
-            if(salt != null) {
-                obfuscatorBuilder.setSalt(salt);
-                System.out.println("Obfuscating using salt: " + obfuscatorBuilder.getSalt());
-            }
-            
-            performObfuscation(outputDirectory, inputs, obfuscatorBuilder);
+            performXMLObfuscation(seed, salt, configuration);
             
         } else {
             reportError("Unknown mode " + mode + " selected in configuration");
         }
         
         return IApplication.EXIT_OK;
+    }
+
+    /**
+     * @param seed
+     * @param salt
+     * @param configuration
+     */
+    private void performEMFObfuscation(String seed, String salt, Properties configuration) {
+        // ensure output directory existence
+        File outputDirectory = checkOutputDirectory(configuration);
+        
+        // check input file existence
+        Map<String, URI> inputs = processInput(configuration);
+        
+        Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
+        ResourceSetImpl ecoreRS = performEMFSetup(extensionToFactoryMap);
+        
+        // load ecore models into registry
+        loadEcorePackagesIntoRegistry(configuration, EPackage.Registry.INSTANCE, ecoreRS);
+        
+        // load inputs into resource set
+        ResourceSetImpl resourceSet = loadInputModels(inputs, extensionToFactoryMap);
+        
+        // initialize obfuscator
+        EMFModelObfuscatorBuilder obfuscatorBuilder = EMFModelObfuscatorBuilder.create();
+        obfuscatorBuilder.setInput(resourceSet);
+        
+        if(seed != null) {
+            obfuscatorBuilder.setSeed(seed);
+        }
+        System.out.println("Obfuscating using seed: " + obfuscatorBuilder.getSeed());
+        
+        if(salt != null) {
+            obfuscatorBuilder.setSalt(salt);
+            System.out.println("Obfuscating using salt: " + obfuscatorBuilder.getSalt());
+        }
+        
+        // perform obfuscation
+        performObfuscation(obfuscatorBuilder);
+        
+        // save models to output directory
+        saveObfuscatedModels(outputDirectory, inputs, resourceSet);
+    }
+
+    /**
+     * @param extensionToFactoryMap
+     * @return
+     */
+    private ResourceSetImpl performEMFSetup(Map<String, Object> extensionToFactoryMap) {
+        if(!extensionToFactoryMap.containsKey("ecore")) {
+            extensionToFactoryMap.put("ecore", new EcoreResourceFactoryImpl());
+        }
+        ResourceSetImpl ecoreRS = new ResourceSetImpl();
+        final ExtendedMetaData extendedMetaData = new BasicExtendedMetaData(EPackage.Registry.INSTANCE);
+        ecoreRS.getLoadOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetaData);
+        return ecoreRS;
+    }
+
+    /**
+     * @param configuration
+     * @return
+     */
+    private Map<String, URI> processInput(Properties configuration) {
+        Map<String,URI> inputs = Maps.newHashMap();
+        List<String> resultList = processFileListProperty(configuration, OBFUSCATION_INPUT_PROPERTY);
+        for (String filePath : resultList) {
+            URI fileURI = URI.createFileURI(filePath);
+            inputs.put(filePath,fileURI);
+        }
+        return inputs;
+    }
+
+    /**
+     * @param inputs
+     * @param extensionToFactoryMap
+     * @return
+     */
+    private ResourceSetImpl loadInputModels(Map<String, URI> inputs, Map<String, Object> extensionToFactoryMap) {
+        ResourceSetImpl resourceSet = new ResourceSetImpl();
+        for (Entry<String, URI> inputEntry : inputs.entrySet()) {
+            URI uri = inputEntry.getValue();
+            // XXX we only support XMI resources in this way
+            if(!extensionToFactoryMap.containsKey(uri.fileExtension())) {
+                extensionToFactoryMap.put(uri.fileExtension(), new EcoreResourceFactoryImpl());
+            }
+            System.out.println("Loading resource: " + inputEntry.getKey());
+            Stopwatch stopwatch = Stopwatch.createStarted();
+            resourceSet.getResource(uri, true);
+            stopwatch.stop();
+            String elapsedTime = stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms (" + stopwatch.elapsed(TimeUnit.NANOSECONDS) + " ns)";
+            System.out.println("Loaded resource: " + inputEntry.getKey() + " in " + elapsedTime);
+        }
+        return resourceSet;
+    }
+
+    /**
+     * @param configuration
+     * @param ePackageRegistryInstance
+     * @param ecoreRS
+     */
+    private void loadEcorePackagesIntoRegistry(Properties configuration,
+            org.eclipse.emf.ecore.EPackage.Registry ePackageRegistryInstance, ResourceSetImpl ecoreRS) {
+        String ecore = getPropertyValue(configuration, OBFUSCATION_ECORE_PROPERTY);
+        StringTokenizer ecoreTokenizer = new StringTokenizer(ecore,";");
+        while (ecoreTokenizer.hasMoreTokens()) {
+            String ecorePath = (String) ecoreTokenizer.nextToken();
+            // create input stream for input files
+            Resource ecoreResource = ecoreRS.getResource(URI.createFileURI(ecorePath), true);
+            EObject root = ecoreResource.getContents().get(0);
+            if(root instanceof EPackage) {
+                EPackage ePackage = (EPackage) root;
+                ePackageRegistryInstance.put(ePackage.getNsURI(), ePackage);
+                System.out.println("Registered metamodel: " + ePackage.getName() + "(nsURI: " + ePackage.getNsURI() + ")");
+            }
+        }
+    }
+
+    /**
+     * @param obfuscatorBuilder
+     */
+    private void performObfuscation(EMFModelObfuscatorBuilder obfuscatorBuilder) {
+        SimpleEMFModelObfuscator obfuscator = obfuscatorBuilder.build();
+        System.out.println("Obfuscating EMF resource set");
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        obfuscator.obfuscate();
+        stopwatch.stop();
+        String elapsedTime = stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms (" + stopwatch.elapsed(TimeUnit.NANOSECONDS) + " ns)";
+        System.out.println("Obfuscation finished in: " + elapsedTime);
+    }
+
+    /**
+     * @param outputDirectory
+     * @param inputs
+     * @param resourceSet
+     */
+    private void saveObfuscatedModels(File outputDirectory, Map<String, URI> inputs, ResourceSetImpl resourceSet) {
+        URI outputDirUri = URI.createFileURI(outputDirectory.getPath());
+        for (Entry<String, URI> entry : inputs.entrySet()) {
+            URI uri = entry.getValue();
+            String fileSegment = uri.lastSegment();
+            URI outputUri = outputDirUri.appendSegment(fileSegment);
+            Resource resource = resourceSet.getResource(uri, false);
+            resource.setURI(outputUri);
+            try {
+                System.out.println("Saving resource: " + fileSegment);
+                Stopwatch stopwatch2 = Stopwatch.createStarted();
+                resource.save(null);
+                stopwatch2.stop();
+                String elapsedTime2 = stopwatch2.elapsed(TimeUnit.MILLISECONDS) + " ms (" + stopwatch2.elapsed(TimeUnit.NANOSECONDS) + " ns)";
+                System.out.println("Saved resource: " + fileSegment + " in " + elapsedTime2);
+            } catch (IOException e) {
+                reportError("Could not save output " + fileSegment);
+            }
+        }
+    }
+
+    private List<String> processFileListProperty(Properties configuration, String obfuscationInputProperty) {
+        List<String> resultList = Lists.newArrayList();
+        String input = getPropertyValue(configuration, obfuscationInputProperty);
+        StringTokenizer inputTokenizer = new StringTokenizer(input,";");
+        while (inputTokenizer.hasMoreTokens()) {
+            String inputPath = (String) inputTokenizer.nextToken();
+            // create input stream for input files
+            File file = new File(inputPath);
+            if(!file.exists()) {
+                reportError("Input " + file.getPath() + " specified in configuration could not be found");
+            }
+            if(file.isFile()) {
+                String fileName = file.getName();
+                if(resultList.contains(fileName)) {
+                    reportError("Multiple files with the same name " + fileName + " in configuration");
+                }
+                resultList.add(inputPath);
+            } else if(file.isDirectory()) {
+                /*
+                 * TODO we could support directories, either processing only directly contained files or all transitive
+                 * files. However, we would need to take care in putting the directory structure into the output, handle
+                 * symbolic and hard links, etc.
+                 */
+                reportError("Input" + file.getPath() + " specified in configuration is a directory");
+            }
+        }
+        return resultList;
+    }
+
+    /**
+     * @param seed
+     * @param salt
+     * @param configuration
+     */
+    private void performXMLObfuscation(String seed, String salt, Properties configuration) {
+        // ensure output directory existence
+        File outputDirectory = checkOutputDirectory(configuration);
+        
+        // check input file existence
+        Map<String,FileInputStream> inputs = Maps.newHashMap();
+        prepareInputStreams(configuration, inputs);
+        
+        // parse schema configuration
+        XMLSchemaConfiguration schemaConfiguration = prepareSchemaConfiguration(configuration);
+        
+        // initialize obfuscator
+        XMLModelObfuscatorBuilder obfuscatorBuilder = XMLModelObfuscatorBuilder.create().setSchemaConfiguration(schemaConfiguration);
+        
+        if(seed != null) {
+            obfuscatorBuilder.setSeed(seed);
+        }
+        System.out.println("Obfuscating using seed: " + obfuscatorBuilder.getSeed());
+        
+        if(salt != null) {
+            obfuscatorBuilder.setSalt(salt);
+            System.out.println("Obfuscating using salt: " + obfuscatorBuilder.getSalt());
+        }
+        
+        performObfuscation(outputDirectory, inputs, obfuscatorBuilder);
     }
 
     private Properties loadConfigurationPropertyFile(String configPath) throws FileNotFoundException, IOException {
@@ -198,42 +390,16 @@ public class ModelObfuscatorHeadless {
     }
 
     private void prepareInputStreams(Properties configuration, Map<String, FileInputStream> inputs) {
-        String input = getPropertyValue(configuration, OBFUSCATION_INPUT_PROPERTY);
-        StringTokenizer inputTokenizer = new StringTokenizer(input,";");
-        while (inputTokenizer.hasMoreTokens()) {
-            String inputPath = (String) inputTokenizer.nextToken();
-            // create input stream for input files
-            File file = new File(inputPath);
-            createFileInputStreams(inputs, file);
-        }
-    }
-
-    /**
-     * @param inputs
-     * @param inputPath
-     */
-    private void createFileInputStreams(Map<String, FileInputStream> inputs, File file) {
-        if(!file.exists()) {
-            reportError("Input " + file.getPath() + " specified in configuration could not be found");
-        }
-        if(file.isFile()) {
+        List<String> resultList = processFileListProperty(configuration, OBFUSCATION_INPUT_PROPERTY);
+        // create input stream for input files
+        for (String fileName : resultList) {
+            File file = new File(fileName);
             try {
                 FileInputStream fileInputStream = new FileInputStream(file);
-                String fileName = file.getName();
-                if(inputs.containsKey(fileName)) {
-                    reportError("Multiple files with the same name " + fileName + " in configuration");
-                }
-                inputs.put(fileName,fileInputStream);
+                inputs.put(file.getName(),fileInputStream);
             } catch (FileNotFoundException e) {
                 reportError("Input " +  file.getPath() + " specified in configuration could not be found, although it exists");
             }
-        } else if(file.isDirectory()) {
-            /*
-             * TODO we could support directories, either processing only directly contained files or all transitive
-             * files. However, we would need to take care in putting the directory structure into the output, handle
-             * symbolic and hard links, etc.
-             */
-            reportError("Input" + file.getPath() + " specified in configuration is a directory");
         }
     }
 
