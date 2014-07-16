@@ -7,12 +7,8 @@
    </configIni>
 
    <launcherArgs>
-      <programArgs>-consoleLog
-      </programArgs>
-      <vmArgs>-Xms200m -Xmx1024m
-      </vmArgs>
-      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
-      </vmArgsMac>
+      <vmArgs>-Xms200m -Xmx1024m -XX:MaxPermSize=256M</vmArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
    <windowImages/>
@@ -48,5 +44,11 @@
       <plugin id="org.eclipse.xtext.xbase.lib"/>
    </plugins>
 
+   <configurations>
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.e4.core.services" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="0" />
+   </configurations>
 
 </product>
