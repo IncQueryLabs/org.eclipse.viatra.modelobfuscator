@@ -9,10 +9,10 @@ The VIATRA Model Obfuscator is a small utility for obfuscating structured graph-
 The current version of the model obfuscator (0.7.0) only obfuscates text content in XML files and String values in EMF models. The obfuscator API receives an obfuscation string (seed) and the input model, it traverses the model and replaces all data values with an obfuscated value that is deterministically computed based on the data value and the obfuscation string.
 
 There are several different ways for using the obfuscator:
-- Eclipse UI contribution
-- Command line application
-- Maven plugin for integration through API usage
-- OSGi bundle for integration through API usage
+ * Eclipse UI contribution
+ * Command line application
+ * Maven plugin for integration through API usage
+ * OSGi bundle for integration through API usage
 
 ## Eclise UI contribution
 
