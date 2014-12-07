@@ -15,7 +15,7 @@ There are several different ways for using the obfuscator:
 * Maven plugin for integration through API usage
 * OSGi bundle for integration through API usage
 
-## Eclise UI contribution
+## Eclipse UI contribution
 
 The EMF model obfuscator can be installed from the [update site](http://download.eclipse.org/viatra2/modelobfuscator/updates/integration) and the user can perform the obfuscation on any EMF model loaded into the generic or reflective EMF editors. The obfuscator does not save the models and it is possible to undo the changes. In addition, the error log will contain an entry that provides the random obfuscation string used. Resources that are not writable are not modified.
 
