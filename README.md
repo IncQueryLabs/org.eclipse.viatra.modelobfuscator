@@ -4,6 +4,8 @@
 
 The VIATRA Model Obfuscator is a small utility for obfuscating structured graph-like models (e.g. XML documents, EMF models) by altering all data values (such as names, identifiers or other strings) in a way that the structure of the model remains the same. Two data values that were identical before the obfuscation will also be identical after it, but the obfuscated value computed based on an input obfuscation string will be completely different (e.g. "Info1" may become "K18DWVQ=").
 
+For more details, read this [blog post](http://modeling-languages.com/model-obfuscator/).
+
 ## Overview
 
 The current version of the model obfuscator (0.7.0) only obfuscates text content in XML files and String values in EMF models. The obfuscator API receives an obfuscation string (seed) and the input model, it traverses the model and replaces all data values with an obfuscated value that is deterministically computed based on the data value and the obfuscation string.
