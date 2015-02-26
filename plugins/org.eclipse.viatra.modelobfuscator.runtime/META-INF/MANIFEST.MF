@@ -6,7 +6,7 @@ Bundle-Version: 0.7.0.qualifier
 Bundle-Vendor: Eclipse VIATRA Project
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.xtend.lib,
- com.google.guava,
+ com.google.guava;bundle-version="14.0.0",
  org.eclipse.xtext.xbase.lib,
  org.eclipse.emf.ecore
 Export-Package: org.eclipse.viatra.modelobfuscator.api,
