@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.viatra.modelobfuscator.util.ObfuscatorUtil
 import org.eclipse.viatra.modelobfuscator.util.StringObfuscator
 import com.google.common.base.Preconditions
+import java.util.Map
 
 /**
  * Builder API for setting up an EMF obfuscator. Currently the only implementation that can
@@ -34,7 +35,8 @@ class EMFModelObfuscatorBuilder {
   private ResourceSet inputRS
   private ResourceFilter filter
   private String saltString = ""
-  private String seedString = ObfuscatorUtil.generateHexSeed(32);
+  private String seedString = ObfuscatorUtil.generateHexSeed(32)
+  private Map<String,String> obfuscationMap = null
 
   /**
    * Hiding constructor of builder
@@ -74,6 +76,11 @@ class EMFModelObfuscatorBuilder {
     saltString = salt
     return this
   }
+  
+  def setTraceMap(Map<String,String> obfuscationMap) {
+  	this.obfuscationMap = obfuscationMap
+  	return this
+  }
 
   def getSeed(){
     return seedString
@@ -103,6 +110,10 @@ class EMFModelObfuscatorBuilder {
     obfuscator.inputResourceSet = inputRS
     obfuscator.filter = filter
     obfuscator.stringObfuscator = new StringObfuscator(seedString, saltString)
+    if(obfuscationMap!=null) {
+    	obfuscator.obfuscationMap = obfuscationMap
+    	obfuscator.trace = true
+    }
     return obfuscator
   }
 

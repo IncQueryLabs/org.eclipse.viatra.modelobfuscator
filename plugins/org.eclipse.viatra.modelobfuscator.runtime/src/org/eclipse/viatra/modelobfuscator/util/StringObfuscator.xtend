@@ -22,28 +22,47 @@ class StringObfuscator implements DataTypeObfuscator<String> {
   
   private String seed
   private String salt
+  private String prefix
   
   new(String seed, String salt){
     Preconditions.checkArgument(seed != null, "Seed cannot be null")
     Preconditions.checkArgument(salt != null, "Salt cannot be null")
     this.seed = seed
     this.salt = salt
+    this.prefix = ""
+  }
+  
+  new(String seed, String salt, String prefix){
+    Preconditions.checkArgument(seed != null, "Seed cannot be null")
+    Preconditions.checkArgument(salt != null, "Salt cannot be null")
+    Preconditions.checkArgument(prefix != null, "Prefix cannot be null")
+    this.seed = seed
+    this.salt = salt
+    this.prefix = prefix
   }
   
   override obfuscateData(String original) {
     if(original != null){
       val salted = salt + original
       val obfuscatedBytes = ObfuscatorUtil.xorWithSeed(salted.bytes, seed.bytes)
-      return BaseEncoding.base64.encode(obfuscatedBytes)
+      return addPrefix(BaseEncoding.base16.encode(obfuscatedBytes))
     }
   }
   
   override restoreData(String obfuscated) {
     if(obfuscated != null){
-      val obfuscatedBytes = BaseEncoding.base64.decode(obfuscated)
+      val obfuscatedBytes = BaseEncoding.base16.decode(removePrefix(obfuscated))
       val salted = new String(ObfuscatorUtil.xorWithSeed(obfuscatedBytes, seed.bytes))
       return salted.substring(salt.length)
     }
+  }
+  
+  private def String addPrefix(String data) {
+  	return prefix+data
+  }
+  
+  private def String removePrefix(String data) {
+  	return data.substring(prefix.length)
   }
   
   def getSeed(){
@@ -52,6 +71,10 @@ class StringObfuscator implements DataTypeObfuscator<String> {
   
   def getSalt(){
     salt
+  }
+  
+  def getPrefix(){
+  	prefix
   }
   
 }

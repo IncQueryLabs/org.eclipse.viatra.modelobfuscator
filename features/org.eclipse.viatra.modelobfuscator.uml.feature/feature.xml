@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.viatra.modelobfuscator.uml.feature"
+      label="VIATRA UML Model Obfuscator Feature"
+      version="0.7.0.qualifier"
+      provider-name="Eclipse VIATRA Project"
+      license-feature="org.eclipse.license"
+      license-feature-version="0.0.0">
+
+   <description url="http://www.example.com/description">
+      VIATRA UML Model Obfuscator
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <url>
+      <update label="VIATRA" url="http://download.eclipse.org/viatra/modelobfuscator/updates/release"/>
+   </url>
+
+   <includes
+         id="org.eclipse.viatra.modelobfuscator.feature"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.viatra.modelobfuscator.runtime.uml"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.viatra.modelobfuscator.ui.uml"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

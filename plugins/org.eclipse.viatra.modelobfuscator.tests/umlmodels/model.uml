@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:profile="http:///schemas/profile/_A8uJYBpzEeWY8eDXM_2o8A/0" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http:///schemas/profile/_A8uJYBpzEeWY8eDXM_2o8A/0 profile_original.profile.uml#_A8uJYhpzEeWY8eDXM_2o8A">
+  <uml:Model xmi:id="_ErldQBpyEeWY8eDXM_2o8A" name="Model">
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_ErldQRpyEeWY8eDXM_2o8A">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_LTAyUBp0EeWY8eDXM_2o8A" name="ClassWithoutStereotype"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_NQd9gBp0EeWY8eDXM_2o8A" name="ClassWithStereotype"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_O0JWwBp0EeWY8eDXM_2o8A" name="ClassWithStereotypeAndModifiedAttributes"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_UVeRUBp0EeWY8eDXM_2o8A">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_UVxMQRp0EeWY8eDXM_2o8A" source="PapyrusVersion">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_UVxMQhp0EeWY8eDXM_2o8A" key="Version" value="0.0.1"/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_UVxMQxp0EeWY8eDXM_2o8A" key="Comment" value=""/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_UVxMRBp0EeWY8eDXM_2o8A" key="Copyright" value=""/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_UVxMRRp0EeWY8eDXM_2o8A" key="Date" value="2015-06-24"/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_UVxMRhp0EeWY8eDXM_2o8A" key="Author" value=""/>
+      </eAnnotations>
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_UVxMQBp0EeWY8eDXM_2o8A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="profile_original.profile.uml#_A8uJYhpzEeWY8eDXM_2o8A"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="profile_original.profile.uml#_pXF74BpyEeWY8eDXM_2o8A"/>
+    </profileApplication>
+  </uml:Model>
+  <profile:MyStereotype xmi:id="_Vw9-8Bp0EeWY8eDXM_2o8A" base_Class="_NQd9gBp0EeWY8eDXM_2o8A"/>
+  <profile:MyStereotype xmi:id="_Wg61MBp0EeWY8eDXM_2o8A" base_Class="_O0JWwBp0EeWY8eDXM_2o8A" MyIntegerValue="1" MyStringValue="Not default string value."/>
+</xmi:XMI>

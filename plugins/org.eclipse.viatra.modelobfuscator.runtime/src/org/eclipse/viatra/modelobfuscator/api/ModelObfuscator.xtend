@@ -10,6 +10,9 @@
  *******************************************************************************/
 package org.eclipse.viatra.modelobfuscator.api
 
+import org.eclipse.viatra.modelobfuscator.util.StringObfuscator
+import java.util.Map
+
 /**
  * Model obfuscators are used to modify an input model to 
  * conceal all sensitive details (especially String attribute values)
@@ -30,4 +33,8 @@ interface ModelObfuscator {
    * configured by the same values as the one used for obfuscation.
    */
   def void restore()
+  
+  def StringObfuscator getStringObfuscator()
+  
+  def Map<String,String> getObfuscationMap()
 }

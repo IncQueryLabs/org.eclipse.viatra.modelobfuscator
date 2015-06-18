@@ -11,12 +11,13 @@
   <packaging>pom</packaging>
   <modules>
     <module>../../plugins/org.eclipse.viatra.modelobfuscator.runtime</module>
+    <module>../../plugins/org.eclipse.viatra.modelobfuscator.runtime.uml</module>
     
     <module>../../releng/org.eclipse.viatra.modelobfuscator.target</module>
   </modules>
   <properties>
-    <tycho.version>0.18.1</tycho.version>
-    <tycho.extras.version>0.18.1</tycho.extras.version>
+    <tycho.version>0.23.0</tycho.version>
+    <tycho.extras.version>0.23.0</tycho.extras.version>
     <tycho.groupId>org.eclipse.tycho</tycho.groupId>
     <tycho.scmUrl>scm:git:git://git.eclipse.org/gitroot/viatra2/org.eclipse.viatra.modelobfuscator.git</tycho.scmUrl>
     <eclipse.bugzillaUrl>https://bugs.eclipse.org/bugs/enter_bug.cgi?product=Viatra</eclipse.bugzillaUrl>
@@ -199,11 +200,13 @@
       </activation>
       <modules>
 	      <module>../../plugins/org.eclipse.viatra.modelobfuscator.ui</module>
+	      <module>../../plugins/org.eclipse.viatra.modelobfuscator.ui.uml</module>
 	      <module>../../plugins/org.eclipse.viatra.modelobfuscator.application</module>
 		    <!-- Needs BPM example metamodel as dependency
 		    <module>../../plugins/org.eclipse.viatra.modelobfuscator.tests</module>
 		      -->
         <module>../../features/org.eclipse.viatra.modelobfuscator.feature</module>
+        <module>../../features/org.eclipse.viatra.modelobfuscator.uml.feature</module>
         <module>../../releng/org.eclipse.viatra.modelobfuscator.update</module>
         <module>../../releng/org.eclipse.viatra.modelobfuscator.product</module>
       </modules>

@@ -3,5 +3,8 @@
    <feature url="features/org.eclipse.viatra.modelobfuscator.feature_0.7.0.qualifier.jar" id="org.eclipse.viatra.modelobfuscator.feature" version="0.7.0.qualifier">
       <category name="org.eclipse.viatra.modelobfuscator.category"/>
    </feature>
+   <feature url="features/org.eclipse.viatra.modelobfuscator.uml.feature_0.7.0.qualifier.jar" id="org.eclipse.viatra.modelobfuscator.uml.feature" version="0.7.0.qualifier">
+      <category name="org.eclipse.viatra.modelobfuscator.category"/>
+   </feature>
    <category-def name="org.eclipse.viatra.modelobfuscator.category" label="VIATRA Model Obfuscator"/>
 </site>

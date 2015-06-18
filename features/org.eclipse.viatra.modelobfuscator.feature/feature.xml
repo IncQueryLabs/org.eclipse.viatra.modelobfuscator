@@ -14,7 +14,7 @@
    <copyright url="http://www.example.com/copyright">
       [Enter Copyright Description here.]
    </copyright>
-   
+
    <url>
       <update label="VIATRA" url="http://download.eclipse.org/viatra/modelobfuscator/updates/release"/>
    </url>

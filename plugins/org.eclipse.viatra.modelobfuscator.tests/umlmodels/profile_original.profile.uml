@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Profile xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_pXF74BpyEeWY8eDXM_2o8A" name="profile" metaclassReference="_tHx_QBpyEeWY8eDXM_2o8A">
+  <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_A8uJYRpzEeWY8eDXM_2o8A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_A8uJYhpzEeWY8eDXM_2o8A" name="profile" nsURI="http:///schemas/profile/_A8uJYBpzEeWY8eDXM_2o8A/0" nsPrefix="profile">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_A8uJbBpzEeWY8eDXM_2o8A" source="PapyrusVersion">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_A8uJbRpzEeWY8eDXM_2o8A" key="Version" value="0.0.1"/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_A8uJbhpzEeWY8eDXM_2o8A" key="Comment" value=""/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_A8uJbxpzEeWY8eDXM_2o8A" key="Copyright" value=""/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_A8uJcBpzEeWY8eDXM_2o8A" key="Date" value="2015-06-24"/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_A8uJcRpzEeWY8eDXM_2o8A" key="Author" value=""/>
+      </eAnnotations>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_A8uJYxpzEeWY8eDXM_2o8A" name="MyStereotype">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_A8uJZBpzEeWY8eDXM_2o8A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_qXOjMBpyEeWY8eDXM_2o8A"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_A8uJZRpzEeWY8eDXM_2o8A" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_A8uJZxpzEeWY8eDXM_2o8A" name="MyIntegerValue" ordered="false" lowerBound="1" defaultValueLiteral="0">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/uml2/5.0.0/Types#//Integer"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_A8uJaRpzEeWY8eDXM_2o8A" name="MyStringValue" ordered="false" lowerBound="1" defaultValueLiteral="Default string value.">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/uml2/5.0.0/Types#//String"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </contents>
+  </eAnnotations>
+  <elementImport xmi:type="uml:ElementImport" xmi:id="_tHx_QBpyEeWY8eDXM_2o8A" alias="Class">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_qXOjMBpyEeWY8eDXM_2o8A" name="MyStereotype">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_ueq5sBpyEeWY8eDXM_2o8A" name="base_Class" association="_ue0qsBpyEeWY8eDXM_2o8A">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_wBA2MBpyEeWY8eDXM_2o8A" name="MyIntegerValue" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_xlUhkBpyEeWY8eDXM_2o8A" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xlUhkRpyEeWY8eDXM_2o8A" value="1"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_2BcHkBpyEeWY8eDXM_2o8A" name="DefaultIntegerValue"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_3jRtwBpyEeWY8eDXM_2o8A" name="MyStringValue" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5sCKABpyEeWY8eDXM_2o8A" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5sCKARpyEeWY8eDXM_2o8A" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_-A7tsBpyEeWY8eDXM_2o8A" name="DefaultStringValue" value="Default string value."/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_ue0qsBpyEeWY8eDXM_2o8A" name="E_MyStereotype_Class1" memberEnd="_ue0qsRpyEeWY8eDXM_2o8A _ueq5sBpyEeWY8eDXM_2o8A">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_ue0qsRpyEeWY8eDXM_2o8A" name="extension_MyStereotype" type="_qXOjMBpyEeWY8eDXM_2o8A" aggregation="composite" association="_ue0qsBpyEeWY8eDXM_2o8A"/>
+  </packagedElement>
+</uml:Profile>

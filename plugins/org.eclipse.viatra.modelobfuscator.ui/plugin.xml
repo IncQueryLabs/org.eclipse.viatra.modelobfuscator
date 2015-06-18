@@ -25,46 +25,28 @@
                style="push">
             <visibleWhen
                   checkEnabled="false">
-               <with
-                     variable="activePartId">
-                  <equals
-                        value="org.eclipse.emf.ecore.presentation.XMLReflectiveEditorID">
-                  </equals>
-               </with>
-            </visibleWhen>
-         </command>
-      </menuContribution>
-      <menuContribution
-            allPopups="false"
-            locationURI="popup:org.eclipse.ui.popup.any">
-         <command
-               commandId="org.eclipse.viatra.modelobfuscator.ui.obfuscateModel"
-               style="push">
-            <visibleWhen
-                  checkEnabled="false">
-               <with
-                     variable="activePartId">
-                  <equals
-                        value="org.eclipse.emf.ecore.presentation.ReflectiveEditorID">
-                  </equals>
-               </with>
-            </visibleWhen>
-         </command>
-      </menuContribution>
-      <menuContribution
-            allPopups="false"
-            locationURI="popup:org.eclipse.ui.popup.any">
-         <command
-               commandId="org.eclipse.viatra.modelobfuscator.ui.obfuscateModel"
-               style="push">
-            <visibleWhen
-                  checkEnabled="false">
-               <with
-                     variable="activePartId">
-                  <equals
-                        value="org.eclipse.emf.genericEditor">
-                  </equals>
-               </with>
+               <and>
+                  <with
+                        variable="activePartId">
+                     <or>
+                        <equals
+                              value="org.eclipse.emf.ecore.presentation.XMLReflectiveEditorID">
+                        </equals>
+                        <equals
+                              value="org.eclipse.emf.ecore.presentation.ReflectiveEditorID">
+                        </equals>
+                        <equals
+                              value="org.eclipse.emf.genericEditor">
+                        </equals>
+                        <equals
+                              value="org.eclipse.emf.ecore.presentation.EcoreEditorID">
+                        </equals>
+                     </or>
+                  </with>
+                  <reference
+                        definitionId="org.eclipse.viatra.modelobfuscator.ui.notifierdef">
+                  </reference>
+               </and>
             </visibleWhen>
          </command>
       </menuContribution>

@@ -146,7 +146,7 @@ class XMLModelObfuscator implements ModelObfuscator {
     outputWriter.close
   }
 
-  def getStringObfuscator() {
+  override getStringObfuscator() {
     stringObfuscator
   }
 
@@ -157,4 +157,9 @@ class XMLModelObfuscator implements ModelObfuscator {
       data.restoreData
     }
   }
+		
+	override getObfuscationMap() {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+		
 }
