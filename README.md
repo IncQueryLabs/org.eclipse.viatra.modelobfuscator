@@ -32,3 +32,11 @@ The model obfuscator is available as a [Maven plugin](http://git.eclipse.org/c/v
 ## OSGi bundle
 
 The core runtime of the model obfuscator is a simple OSGi bundle that can be added as a dependency of plugin projects. The API of the runtime is documented in JavaDoc and there are a set of [JUnit tests](http://git.eclipse.org/c/viatra2/org.eclipse.viatra.modelobfuscator.git/tree/plugins/org.eclipse.viatra.modelobfuscator.tests) that show the usage of the API for both XML and EMF.
+
+## Contributing to VIATRA
+
+Please read the [Contributing](http://wiki.eclipse.org/VIATRA/Contributing) wiki page to understand our contribution process.
+
+## License
+
+All code in this repository is available under the Eclipse Public License v1.0: [http://www.eclipse.org/legal/epl-v10.html](http://www.eclipse.org/legal/epl-v10.html)
