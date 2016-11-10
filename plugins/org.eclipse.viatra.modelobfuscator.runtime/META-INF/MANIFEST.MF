@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VIATRA Model Obfuscator Runtime
 Bundle-SymbolicName: org.eclipse.viatra.modelobfuscator.runtime
-Bundle-Version: 0.7.0.qualifier
+Bundle-Version: 0.15.0.qualifier
 Bundle-Vendor: Eclipse VIATRA Project
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.xtend.lib,

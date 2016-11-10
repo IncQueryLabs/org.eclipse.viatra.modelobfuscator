@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VIATRA Model Obfuscator UI
 Bundle-SymbolicName: org.eclipse.viatra.modelobfuscator.ui;singleton:=true
-Bundle-Version: 0.7.0.qualifier
+Bundle-Version: 0.15.0.qualifier
 Bundle-Activator: org.eclipse.viatra.modelobfuscator.ui.ModelObfuscatorUIPlugin
 Bundle-Vendor: Eclipse VIATRA Project
 Require-Bundle: org.eclipse.ui,

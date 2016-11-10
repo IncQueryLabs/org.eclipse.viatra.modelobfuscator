@@ -14,8 +14,8 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.viatra.modelobfuscator.emf.simple.EMFModelObfuscatorBuilder
 import org.junit.Test
-import process.Process
-import process.ProcessFactory
+import org.eclipse.viatra.examples.bpm.process.Process
+import org.eclipse.viatra.examples.bpm.process.ProcessFactory
 
 import static org.junit.Assert.*
 import org.eclipse.viatra.modelobfuscator.util.ObfuscatorUtil

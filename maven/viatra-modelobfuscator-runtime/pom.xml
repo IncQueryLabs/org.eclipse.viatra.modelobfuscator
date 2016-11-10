@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.eclipse.viatra</groupId>
     <artifactId>org.eclipse.viatra.modelobfuscator.parent</artifactId>
-    <version>0.7.0-SNAPSHOT</version>
+    <version>0.15.0-SNAPSHOT</version>
     <relativePath>../../releng/org.eclipse.viatra.modelobfuscator.parent</relativePath>
   </parent>
   <artifactId>viatra-modelobfuscator-runtime</artifactId>

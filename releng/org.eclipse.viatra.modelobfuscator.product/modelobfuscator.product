@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="VIATRA Model Obfuscator Product" uid="org.eclipse.viatra.modelobfuscator.product" id="org.eclipse.viatra.modelobfuscator" application="org.eclipse.viatra.modelobfuscator.application.app" version="0.7.0.qualifier" useFeatures="false" includeLaunchers="true">
+<product name="VIATRA Model Obfuscator Product" uid="org.eclipse.viatra.modelobfuscator.product" id="org.eclipse.viatra.modelobfuscator" application="org.eclipse.viatra.modelobfuscator.application.app" version="0.15.0.qualifier" useFeatures="false" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
@@ -42,8 +42,8 @@
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.compatibility.state" fragment="true"/>
-      <plugin id="org.eclipse.viatra.modelobfuscator.application" version="0.7.0.qualifier"/>
-      <plugin id="org.eclipse.viatra.modelobfuscator.runtime" version="0.7.0.qualifier"/>
+      <plugin id="org.eclipse.viatra.modelobfuscator.application" version="0.15.0.qualifier"/>
+      <plugin id="org.eclipse.viatra.modelobfuscator.runtime" version="0.15.0.qualifier"/>
       <plugin id="org.eclipse.xtend.lib"/>
       <plugin id="org.eclipse.xtext.xbase.lib"/>
    </plugins>

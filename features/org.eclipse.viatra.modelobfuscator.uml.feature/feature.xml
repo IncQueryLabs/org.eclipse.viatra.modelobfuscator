@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.viatra.modelobfuscator.uml.feature"
       label="VIATRA UML Model Obfuscator Feature"
-      version="0.7.0.qualifier"
+      version="0.15.0.qualifier"
       provider-name="Eclipse VIATRA Project"
       license-feature="org.eclipse.license"
       license-feature-version="0.0.0">
