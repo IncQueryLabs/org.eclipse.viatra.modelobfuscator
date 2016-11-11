@@ -1,30 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="VIATRA Model Obfuscator" sequenceNumber="1478858754">
+<target name="VIATRA Model Obfuscator" sequenceNumber="1478859686">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.platform.sdk" version="4.4.2.M20150204-1700"/>
       <unit id="org.eclipse.pde.feature.group" version="3.10.1.v20150204-1700"/>
       <unit id="org.eclipse.platform.feature.group" version="4.4.2.v20150204-1700"/>
       <unit id="org.eclipse.equinox.sdk.feature.group" version="3.10.2.v20150204-1316"/>
-      <repository location="http://download.eclipse.org/eclipse/updates/4.4/R-4.4.2-201502041700/"/>
+      <repository location="http://download.eclipse.org/eclipse/updates/4.4/R-4.4.2-201502041700"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.emf.sdk.feature.group" version="2.11.0.v20150601-0402"/>
-      <repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.11/"/>
+      <repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.11"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.emf.transaction.sdk.feature.group" version="1.10.0.201606071900"/>
       <repository location="http://download.eclipse.org/modeling/emf/transaction/updates/releases/R201606071900"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.emf.validation.feature.group" version="1.10.0.201606071713"/>
+      <repository location="http://download.eclipse.org/modeling/emf/validation/updates/releases/R201606071713"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.uml2.sdk.feature.group" version="5.0.2.v20150202-0947"/>
-      <repository location="http://download.eclipse.org/modeling/mdt/uml2/updates/5.0/R201502020947//"/>
+      <repository location="http://download.eclipse.org/modeling/mdt/uml2/updates/5.0/R201502020947"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.license.feature.group" version="1.0.1.v20140414-1359"/>
-      <repository location="http://download.eclipse.org/cbi/updates/license/"/>
+      <repository location="http://download.eclipse.org/cbi/updates/license"/>
     </location>
   </locations>
   <targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
