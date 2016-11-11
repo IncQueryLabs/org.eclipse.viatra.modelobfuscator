@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="VIATRA Model Obfuscator" sequenceNumber="1478860020">
+<target name="VIATRA Model Obfuscator" sequenceNumber="1478860556">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.platform.sdk" version="4.4.2.M20150204-1700"/>
@@ -16,6 +16,7 @@
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.emf.transaction.sdk.feature.group" version="1.8.0.201405281451"/>
+      <unit id="org.eclipse.xtend.sdk.feature.group" version="2.7.3.v201411190455"/>
       <repository location="http://download.eclipse.org/releases/luna/201502271000"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
