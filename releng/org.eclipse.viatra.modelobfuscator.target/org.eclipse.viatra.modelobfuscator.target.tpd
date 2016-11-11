@@ -13,12 +13,8 @@ location "http://download.eclipse.org/modeling/emf/emf/updates/2.11" {
     org.eclipse.emf.sdk.feature.group
 }
 
-location "http://download.eclipse.org/modeling/emf/transaction/updates/releases/R201606071900" {
+location "http://download.eclipse.org/releases/luna/201502271000" {
     org.eclipse.emf.transaction.sdk.feature.group
-}
-
-location "http://download.eclipse.org/modeling/emf/validation/updates/releases/R201606071713" {
-    org.eclipse.emf.validation.feature.group
 }
 
 location "http://download.eclipse.org/modeling/mdt/uml2/updates/5.0/R201502020947" {
