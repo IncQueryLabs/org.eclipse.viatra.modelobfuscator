@@ -19,19 +19,19 @@ There are several different ways for using the obfuscator:
 
 ## Eclipse UI contribution
 
-The EMF model obfuscator can be installed from the [update site](http://download.eclipse.org/viatra2/modelobfuscator/updates/integration) and the user can perform the obfuscation on any EMF model loaded into the generic or reflective EMF editors. The obfuscator does not save the models and it is possible to undo the changes. In addition, the error log will contain an entry that provides the random obfuscation string used. Resources that are not writable are not modified.
+The EMF model obfuscator can be installed from the [update site](http://download.eclipse.org/viatra/modelobfuscator/updates/integration) and the user can perform the obfuscation on any EMF model loaded into the generic or reflective EMF editors. The obfuscator does not save the models and it is possible to undo the changes. In addition, the error log will contain an entry that provides the random obfuscation string used. Resources that are not writable are not modified.
 
 ## Command line application
 
-Both XML and EMF model obfuscators can be used with a command line application, that can be downloaded from [here](https://hudson.eclipse.org/viatra/job/viatra-modelobfuscator-master/lastSuccessfulBuild/artifact/releng/org.eclipse.viatra.modelobfuscator.product/target/products/). The application uses a few command line arguments and a properties file for configuration, examples for both XML and EMF are provided [here](http://git.eclipse.org/c/viatra2/org.eclipse.viatra.modelobfuscator.git/tree/plugins/org.eclipse.viatra.modelobfuscator.application). Calling the application without arguments displays the usage guide.
+Both XML and EMF model obfuscators can be used with a command line application, that can be downloaded from [here](https://hudson.eclipse.org/viatra/job/viatra-modelobfuscator-master/lastSuccessfulBuild/artifact/releng/org.eclipse.viatra.modelobfuscator.product/target/products/). The application uses a few command line arguments and a properties file for configuration, examples for both XML and EMF are provided [here](http://git.eclipse.org/c/viatra/org.eclipse.viatra.modelobfuscator.git/tree/plugins/org.eclipse.viatra.modelobfuscator.application). Calling the application without arguments displays the usage guide.
 
 ## Maven plugin
 
-The model obfuscator is available as a [Maven plugin](http://git.eclipse.org/c/viatra2/org.eclipse.viatra.modelobfuscator.git/tree/maven/viatra-modelobfuscator-runtime) for projects that are POM first. The plugin simply wraps the OSGi runtime bundle into a Maven plugin and is available from repo.eclipse.org.
+The model obfuscator is available as a [Maven plugin](http://git.eclipse.org/c/viatra/org.eclipse.viatra.modelobfuscator.git/tree/maven/viatra-modelobfuscator-runtime) for projects that are POM first. The plugin simply wraps the OSGi runtime bundle into a Maven plugin and is available from repo.eclipse.org.
 
 ## OSGi bundle
 
-The core runtime of the model obfuscator is a simple OSGi bundle that can be added as a dependency of plugin projects. The API of the runtime is documented in JavaDoc and there are a set of [JUnit tests](http://git.eclipse.org/c/viatra2/org.eclipse.viatra.modelobfuscator.git/tree/plugins/org.eclipse.viatra.modelobfuscator.tests) that show the usage of the API for both XML and EMF.
+The core runtime of the model obfuscator is a simple OSGi bundle that can be added as a dependency of plugin projects. The API of the runtime is documented in JavaDoc and there are a set of [JUnit tests](http://git.eclipse.org/c/viatra/org.eclipse.viatra.modelobfuscator.git/tree/plugins/org.eclipse.viatra.modelobfuscator.tests) that show the usage of the API for both XML and EMF.
 
 ## Contributing to VIATRA
 
