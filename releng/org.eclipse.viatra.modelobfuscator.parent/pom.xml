@@ -28,6 +28,10 @@
     <xtend.compiler.version>2.6.1</xtend.compiler.version>
     <incquery.repository.url>http://download.eclipse.org/incquery/updates/release</incquery.repository.url>
     <incquery.compiler.version>0.8.0-SNAPSHOT</incquery.compiler.version>
+    <!-- Composite site related properties -->
+    <viatra.updates.label>VIATRA Model Obfuscator</viatra.updates.label>
+    <viatra.updates.dir>updates</viatra.updates.dir>
+    <viatra.download.area>target/composite</viatra.download.area>
     <!-- Sonar -->
     <sonar.version>3.6</sonar.version>
     <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
