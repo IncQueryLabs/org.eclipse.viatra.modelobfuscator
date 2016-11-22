@@ -25,7 +25,6 @@ class SimpleUMLProfileReplacer {
 	protected Model inputModel
 	protected Profile oldProfile
 	protected Profile newProfile
-	protected String seedString
 	protected String saltString = ""
 	protected extension StringObfuscator stringObfuscator
 	private boolean toOriginal = false
@@ -37,7 +36,6 @@ class SimpleUMLProfileReplacer {
 	def replace(boolean toOriginal) {
 		Preconditions.checkState(inputModel != null, "Input resource set must not be null")
 		Preconditions.checkState(newProfile != null, "New profile must not be null")
-		Preconditions.checkState(seedString != null, "Seed string must not be null")
 		Preconditions.checkState(stringObfuscator != null, "String obfuscator must not be null")
 		
 		val prevDir = this.toOriginal

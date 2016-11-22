@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.viatra.modelobfuscator.ui.uml.handlers;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,6 +89,11 @@ public class UMLProfileReplacerHandler extends AbstractHandler {
 								@Override
 								public String isValid(String newText) {
 									if (newText.length()>0) {
+									    try{
+									        new BigInteger(newText, 36);
+									    } catch (NumberFormatException e) {
+									        return "Seed must be base 36 number";
+									    }
 										return null;
 									}
 									return "Invalid seed";
@@ -109,7 +115,7 @@ public class UMLProfileReplacerHandler extends AbstractHandler {
 			final SimpleUMLProfileReplacer matcher = UMLProfileReplacerBuilder.create()
 					.setInput(selectedModel)
 					.setNewProfile(selectedProfile)
-					.setSeed(seedString).build();
+					.setSeed(new BigInteger(seedString, 36)).build();
 			
 			AbstractCommand replaceCommand = new AbstractCommand("Replacing profile") {
 

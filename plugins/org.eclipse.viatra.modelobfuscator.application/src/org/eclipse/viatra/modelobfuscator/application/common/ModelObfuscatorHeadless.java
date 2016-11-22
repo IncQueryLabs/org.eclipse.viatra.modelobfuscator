@@ -17,6 +17,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -36,8 +37,8 @@ import org.eclipse.emf.ecore.util.ExtendedMetaData;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.equinox.app.IApplication;
+import org.eclipse.viatra.modelobfuscator.emf.simple.AbstractModelObfuscator;
 import org.eclipse.viatra.modelobfuscator.emf.simple.EMFModelObfuscatorBuilder;
-import org.eclipse.viatra.modelobfuscator.emf.simple.SimpleEMFModelObfuscator;
 import org.eclipse.viatra.modelobfuscator.xml.XMLModelObfuscator;
 import org.eclipse.viatra.modelobfuscator.xml.XMLModelObfuscatorBuilder;
 import org.eclipse.viatra.modelobfuscator.xml.XMLSchemaConfiguration;
@@ -172,7 +173,7 @@ public class ModelObfuscatorHeadless {
         obfuscatorBuilder.setInput(resourceSet);
         
         if(seed != null) {
-            obfuscatorBuilder.setSeed(seed);
+            obfuscatorBuilder.setSeed(new BigInteger(seed, 36));
         }
         System.out.println("Obfuscating using seed: " + obfuscatorBuilder.getSeed());
         
@@ -265,7 +266,7 @@ public class ModelObfuscatorHeadless {
      * @param obfuscatorBuilder
      */
     private void performObfuscation(EMFModelObfuscatorBuilder obfuscatorBuilder) {
-        SimpleEMFModelObfuscator obfuscator = obfuscatorBuilder.build();
+        AbstractModelObfuscator obfuscator = obfuscatorBuilder.build();
         System.out.println("Obfuscating EMF resource set");
         Stopwatch stopwatch = Stopwatch.createStarted();
         obfuscator.obfuscate();
@@ -349,7 +350,7 @@ public class ModelObfuscatorHeadless {
         XMLModelObfuscatorBuilder obfuscatorBuilder = XMLModelObfuscatorBuilder.create().setSchemaConfiguration(schemaConfiguration);
         
         if(seed != null) {
-            obfuscatorBuilder.setSeed(seed);
+            obfuscatorBuilder.setSeed(new BigInteger(seed, 36));
         }
         System.out.println("Obfuscating using seed: " + obfuscatorBuilder.getSeed());
         
@@ -514,7 +515,7 @@ public class ModelObfuscatorHeadless {
                 + "<call> -c <configurationFilePath> [-s <seed>] [-salt <salt>]\n"
                 + "  -c       : Required, the configuration that describes what to obfuscate.\n"
                 + "  --config : Same as -c.\n"
-                + "  -s       : Optional, the seed used for the obfuscation.\n"
+                + "  -s       : Optional, the seed used for the obfuscation. Must be base 36 number as string\n"
                 + "  --seed   : Same as -s.\n"
                 + "  --salt   : Optional, the salt used for the obfuscation.");
     }

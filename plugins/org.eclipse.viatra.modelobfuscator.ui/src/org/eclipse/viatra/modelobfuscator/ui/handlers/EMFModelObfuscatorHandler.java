@@ -14,6 +14,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.viatra.modelobfuscator.emf.simple.AbstractModelObfuscator;
 import org.eclipse.viatra.modelobfuscator.emf.simple.EMFModelObfuscatorBuilder;
 import org.eclipse.viatra.modelobfuscator.emf.simple.ResourceFilter;
 import org.eclipse.viatra.modelobfuscator.emf.simple.SimpleEMFModelObfuscator;
@@ -34,7 +35,7 @@ import org.eclipse.viatra.modelobfuscator.emf.simple.SimpleEMFModelObfuscator;
 public class EMFModelObfuscatorHandler extends AbstractModelObfuscatorHandler {
 
 	@Override
-	protected SimpleEMFModelObfuscator createModelObfuscator(ResourceSet resourceSet, final EditingDomain editingDomain, ExecutionEvent event ) {
+	protected AbstractModelObfuscator createModelObfuscator(ResourceSet resourceSet, final EditingDomain editingDomain, ExecutionEvent event ) {
 		return EMFModelObfuscatorBuilder.create().setInput(resourceSet)
                 .setFilter(new ResourceFilter() {
                     @Override

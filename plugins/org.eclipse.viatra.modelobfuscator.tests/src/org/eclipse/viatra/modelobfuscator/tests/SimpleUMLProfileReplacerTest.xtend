@@ -23,6 +23,7 @@ import org.junit.Test
 
 import static org.junit.Assert.*
 import org.eclipse.uml2.uml.Stereotype
+import java.math.BigInteger
 
 class SimpleUMLProfileReplacerTest {
 	private static final String SEED = "990d6121017dd960315eca3176a73bde"
@@ -56,7 +57,7 @@ class SimpleUMLProfileReplacerTest {
 		val replacer = UMLProfileReplacerBuilder.create
 												.setInput(model)
 												.setNewProfile(profileObfuscated)
-												.setSeed(SEED).build
+												.setSeed(new BigInteger(SEED,16)).build
 		replacer.replace
 		val stringObfuscator = replacer.stringObfuscator
 		val myStereotype = profileOriginal.getMember("MyStereotype") as Stereotype

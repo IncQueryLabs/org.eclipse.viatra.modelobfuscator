@@ -10,6 +10,9 @@
  *******************************************************************************/
 package org.eclipse.viatra.modelobfuscator.util;
 
+import java.math.BigInteger;
+import java.util.Random;
+
 import com.google.common.base.Preconditions;
 
 /**
@@ -26,18 +29,27 @@ public class ObfuscatorUtil {
         return out;
     }
     
+    
     public static String generateHexSeed(int length) {
-        Preconditions.checkArgument(length > 0,"Length must be positive");
-        // each fragment is 3 characters and we need an additional one
-        int noOfFragments = (length / 3) + 1;
-        StringBuilder sb = new StringBuilder(noOfFragments * 3);
-        for(int i = 0; i < noOfFragments; i++) {
-            // randomized string but first 3 chars not too random (typically "3fd")
-            String fragment = Long.toHexString(Double.doubleToLongBits(Math.random()));
-            // take only last 3 characters
-            sb.append(fragment.substring(3, 6));
-        }
-        return sb.substring(0, length);
+        return generateRandomString(length, 16);
+    }
+    
+    public static String generateBase36RandomString(int length) {
+        return generateRandomString(length, 36);
+    }
+
+    protected static String generateRandomString(int length, int radix) {
+        Preconditions.checkArgument(length > 0, "Length must be positive");
+        Preconditions.checkArgument(radix >= Character.MIN_RADIX, "Radix must be higher than or equal to Character.MIN_RADIX");
+        Preconditions.checkArgument(radix <= Character.MAX_RADIX, "Radix must be lower than or equal to Character.MAX_RADIX");
+        Random random = new Random();
+        // use BigInteger to generate random number (8 bit per byte)
+        BigInteger randomNumber = new BigInteger(length*8, random);
+        // convert to string with radix
+        String radixString = randomNumber.toString(radix);
+        // ignore the first character to avoid leading zeroes
+        String radixNoLeadingZeroes = radixString.substring(1, length+1);
+        return radixNoLeadingZeroes;  
     }
     
 }

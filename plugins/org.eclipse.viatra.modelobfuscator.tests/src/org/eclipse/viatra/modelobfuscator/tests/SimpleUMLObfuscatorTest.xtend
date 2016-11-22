@@ -23,7 +23,7 @@ import static org.junit.Assert.*
 class SimpleUMLObfuscatorTest {
 	extension UMLFactory umlFactory = UMLFactory.eINSTANCE
 	private static final String TESTMODEL_NAME = "MyModel"
-
+  
   @Test
   def void invokeObfuscatorNoSaltTest() {
 
