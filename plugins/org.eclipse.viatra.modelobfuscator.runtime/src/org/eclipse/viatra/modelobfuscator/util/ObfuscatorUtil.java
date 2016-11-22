@@ -22,9 +22,17 @@ import com.google.common.base.Preconditions;
 public class ObfuscatorUtil {
 
     public static byte[] xorWithSeed(byte[] input, byte[] key) {
+        return xorWithSeed(input, key, 0);
+    }
+    
+    /**
+     * The bits used from the key are offset by the given value.
+     */
+    public static byte[] xorWithSeed(byte[] input, byte[] key, int offset) {
+        int relevantOffset = offset % key.length;
         byte[] out = new byte[input.length];
         for (int i = 0; i < input.length; i++) {
-            out[i] = (byte) (input[i] ^ key[i%key.length]);
+            out[i] = (byte) (input[i] ^ key[(i+relevantOffset)%key.length]);
         }
         return out;
     }

@@ -10,10 +10,10 @@
  *******************************************************************************/
 package org.eclipse.viatra.modelobfuscator.util
 
-import org.eclipse.viatra.modelobfuscator.api.DataTypeObfuscator
-import com.google.common.io.BaseEncoding
 import com.google.common.base.Preconditions
+import com.google.common.io.BaseEncoding
 import java.math.BigInteger
+import org.eclipse.viatra.modelobfuscator.api.DataTypeObfuscator
 
 /**
  * @author Abel Hegedus
@@ -25,6 +25,7 @@ class StringObfuscator implements DataTypeObfuscator<String> {
     private String salt
     private String prefix
     private byte[] seedNumber
+    private val coder = BaseEncoding.base32.omitPadding.lowerCase
 
     @Deprecated
     new(String seed, String salt) {
@@ -55,15 +56,16 @@ class StringObfuscator implements DataTypeObfuscator<String> {
     override obfuscateData(String original) {
         if (original != null) {
             val salted = salt + original
-            val obfuscatedBytes = ObfuscatorUtil.xorWithSeed(salted.bytes, seedNumber)
-            return addPrefix(BaseEncoding.base32.omitPadding.lowerCase.encode(obfuscatedBytes))
+            val obfuscatedBytes = ObfuscatorUtil.xorWithSeed(salted.bytes, seedNumber, salted.bytes.length)
+            return addPrefix(coder.encode(obfuscatedBytes))
         }
     }
 
     override restoreData(String obfuscated) {
         if (obfuscated != null) {
-            val obfuscatedBytes = BaseEncoding.base32.omitPadding.lowerCase.decode(removePrefix(obfuscated))
-            val salted = new String(ObfuscatorUtil.xorWithSeed(obfuscatedBytes, seedNumber))
+            val obfuscatedBytes = coder.decode(removePrefix(obfuscated))
+            val salted = new String(ObfuscatorUtil.xorWithSeed(obfuscatedBytes, seedNumber, obfuscatedBytes.length))
+            Preconditions.checkState(salted.startsWith(salt),"Salt %s does not match in %s",salt,obfuscated)
             return salted.substring(salt.length)
         }
     }
@@ -73,6 +75,7 @@ class StringObfuscator implements DataTypeObfuscator<String> {
     }
 
     private def String removePrefix(String data) {
+        Preconditions.checkArgument(data.startsWith(prefix),"Prefix %s does not match in %s",prefix,data)
         return data.substring(prefix.length)
     }
 
