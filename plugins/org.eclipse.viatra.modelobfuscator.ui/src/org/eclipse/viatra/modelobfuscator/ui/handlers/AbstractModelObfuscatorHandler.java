@@ -82,7 +82,7 @@ public abstract class AbstractModelObfuscatorHandler extends AbstractHandler {
                     messageBuilder.append("\n- prefix: ").append(prefix);
                 }
                 String logMessage = messageBuilder.toString();
-                messageBuilder.append("\n(logged also as an Info level event)");
+                messageBuilder.append("\n(logged also as an Info level event and saved in mapping file)");
                 messageBuilder.append("\nDo you want to perform model obfuscation?");
                 String message = messageBuilder.toString();
                 boolean confirmed = MessageDialog.openConfirm(
