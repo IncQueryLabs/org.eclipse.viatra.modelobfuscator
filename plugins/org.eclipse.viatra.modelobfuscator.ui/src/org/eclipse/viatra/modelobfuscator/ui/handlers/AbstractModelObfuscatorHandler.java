@@ -44,22 +44,32 @@ public abstract class AbstractModelObfuscatorHandler extends AbstractHandler {
                 ILog logger = ModelObfuscatorUIPlugin.getDefault().getLog();
                 final ModelObfuscator obfuscator = createModelObfuscator(resourceSet, editingDomain, event);
                 if(obfuscator==null) {
-                    System.out.println("No obfuscator.");
                     return null;
                 }
                 final String seed = obfuscator.getStringObfuscator().getSeed();
+                final String salt = obfuscator.getStringObfuscator().getSalt();
+                final String prefix = obfuscator.getStringObfuscator().getPrefix();
 
-                boolean confirmed = MessageDialog
-                        .openConfirm(
+                StringBuilder messageBuilder = new StringBuilder();
+                messageBuilder.append("This tool replaces all string attribute values with obfuscated values.\n");
+                messageBuilder.append("You can Undo the operation or restore the original values with\n");
+                messageBuilder.append("- seed:").append(seed);
+                if(!salt.isEmpty()){
+                    messageBuilder.append("\n- salt:").append(salt);
+                }
+                if(!prefix.isEmpty()){
+                    messageBuilder.append("\n- prefix:").append(prefix);
+                }
+                String logMessage = messageBuilder.toString();
+                messageBuilder.append("\n(logged also as an Info level event)");
+                messageBuilder.append("Do you want to perform model obuscation?");
+                String message = messageBuilder.toString();
+                boolean confirmed = MessageDialog.openConfirm(
                                 HandlerUtil.getActiveShell(event),
                                 "Model obfuscation",
-                                "This tool replaces all string attribute values with obfuscated values.\n"
-                                        + " You can Undo the operation or restore the original values with this seed:\n"
-                                        + seed + "\n(logged also as an Info level event)"
-                                        + "Do you want to perform model obuscation?");
+                                message);
                 if (confirmed) {
-                	logger.log(new Status(Status.INFO, ModelObfuscatorUIPlugin.PLUGIN_ID, "Obfuscating with seed: "
-                            + seed));
+                	logger.log(new Status(Status.INFO, ModelObfuscatorUIPlugin.PLUGIN_ID, logMessage));
                     AbstractCommand obfuscationCommand = new AbstractCommand("Obfuscate model") {
 
                         @Override
@@ -77,7 +87,7 @@ public abstract class AbstractModelObfuscatorHandler extends AbstractHandler {
                         public void execute() {
                             obfuscator.obfuscate();
                             Map<String,String> oMap = obfuscator.getObfuscationMap();
-                            printout(oMap, seed);
+                            printout(oMap);
                         }
 
                         @Override
@@ -86,10 +96,16 @@ public abstract class AbstractModelObfuscatorHandler extends AbstractHandler {
                             return true;
                         }
                         
-                        private void printout(Map<String,String> oMap, String seed) {
+                        private void printout(Map<String,String> oMap) {
                         	if(oMap!=null) {
-	                        	StringBuffer mapContent = new StringBuffer("Original;Modified;Obfuscation seed: "+seed+";");
-	                      		for (String key : oMap.keySet()) {
+	                        	StringBuffer mapContent = new StringBuffer("Original;Modified;Obfuscation seed: " + seed + ";");
+	                      		if(!salt.isEmpty()){
+	                      		    mapContent.append("Salt: " + salt + ";");
+	                      		}
+	                      		if(!prefix.isEmpty()){
+	                      		    mapContent.append("Prefix: " + prefix + ";");
+	                      		}
+	                        	for (String key : oMap.keySet()) {
 									mapContent.append("\n"+key+";"+oMap.get(key)+";");
 								}
 	                      		print(mapContent.toString());
@@ -103,6 +119,9 @@ public abstract class AbstractModelObfuscatorHandler extends AbstractHandler {
         return null;
     }
 	
+	/**
+	 * Subclasses should override this method to store the printed content to file
+	 */
 	protected void print(String content) {
 	    System.out.println(content);
 	}
