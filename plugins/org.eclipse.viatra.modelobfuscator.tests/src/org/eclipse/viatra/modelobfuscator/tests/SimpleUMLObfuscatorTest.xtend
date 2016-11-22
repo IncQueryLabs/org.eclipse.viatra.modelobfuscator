@@ -46,7 +46,7 @@ class SimpleUMLObfuscatorTest {
 
     printUMLModel(model)
 
-    val obfuscator = UMLObfuscatorBuilder.create.setInput(rs).build
+    val obfuscator = UMLObfuscatorBuilder.create.setInput(rs).setSalt("").setPrefix("").build
     println("Seed: " + obfuscator.stringObfuscator.seed)
     obfuscator.obfuscate
 

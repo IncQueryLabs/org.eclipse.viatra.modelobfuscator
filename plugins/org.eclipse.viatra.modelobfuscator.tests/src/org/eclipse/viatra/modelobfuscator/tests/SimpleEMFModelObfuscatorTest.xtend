@@ -51,7 +51,7 @@ class SimpleEMFModelObfuscatorTest {
 
     printProcessModel(process)
 
-    val obfuscator = EMFModelObfuscatorBuilder.create.setInput(rs).build
+    val obfuscator = EMFModelObfuscatorBuilder.create.setInput(rs).setSalt("").setPrefix("").build
     println("Seed: " + obfuscator.stringObfuscator.seed)
     obfuscator.obfuscate
 
