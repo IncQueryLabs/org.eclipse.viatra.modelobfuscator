@@ -37,7 +37,7 @@ class EMFModelObfuscatorBuilder {
     private ResourceFilter filter
     private String saltString = ""
     private BigInteger seedNumber = new BigInteger(ObfuscatorUtil.generateBase36RandomString(32), 36)
-    private String prefix = ""
+    private String prefix = "o"
     private Map<String, String> obfuscationMap = null
 
     /**

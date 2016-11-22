@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.viatra.modelobfuscator.ui.handlers;
 
+import java.util.HashMap;
+
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -37,6 +39,7 @@ public class EMFModelObfuscatorHandler extends AbstractModelObfuscatorHandler {
 	@Override
 	protected AbstractModelObfuscator createModelObfuscator(ResourceSet resourceSet, final EditingDomain editingDomain, ExecutionEvent event ) {
 		return EMFModelObfuscatorBuilder.create().setInput(resourceSet)
+		        .setTraceMap(new HashMap<String,String>())
                 .setFilter(new ResourceFilter() {
                     @Override
                     public boolean avoidObfuscation(Resource resource) {

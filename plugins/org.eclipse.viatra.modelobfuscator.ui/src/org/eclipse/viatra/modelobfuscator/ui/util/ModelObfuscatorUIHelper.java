@@ -8,15 +8,15 @@
  * Contributors:
  *   Tamas Borbas - initial API and implementation
  *******************************************************************************/
-package org.eclipse.viatra.modelobfuscator.ui.uml.util;
+package org.eclipse.viatra.modelobfuscator.ui.util;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
-public class UMLHelper {
-    protected UMLHelper() {}
+public class ModelObfuscatorUIHelper {
+    protected ModelObfuscatorUIHelper() {}
     
     public static Resource getResource(Object element) {
         if (element instanceof EObject){

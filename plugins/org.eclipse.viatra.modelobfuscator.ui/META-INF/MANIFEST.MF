@@ -13,4 +13,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.transaction
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.viatra.modelobfuscator.ui.handlers
+Export-Package: org.eclipse.viatra.modelobfuscator.ui,
+ org.eclipse.viatra.modelobfuscator.ui.handlers,
+ org.eclipse.viatra.modelobfuscator.ui.util

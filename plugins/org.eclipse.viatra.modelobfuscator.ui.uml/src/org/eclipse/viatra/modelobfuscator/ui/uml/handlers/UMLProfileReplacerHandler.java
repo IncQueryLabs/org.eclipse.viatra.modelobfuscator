@@ -43,7 +43,7 @@ import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Profile;
 import org.eclipse.viatra.modelobfuscator.emf.uml.SimpleUMLProfileReplacer;
 import org.eclipse.viatra.modelobfuscator.emf.uml.UMLProfileReplacerBuilder;
-import org.eclipse.viatra.modelobfuscator.ui.uml.util.UMLHelper;
+import org.eclipse.viatra.modelobfuscator.ui.util.ModelObfuscatorUIHelper;
 
 public class UMLProfileReplacerHandler extends AbstractHandler {
 
@@ -151,7 +151,7 @@ public class UMLProfileReplacerHandler extends AbstractHandler {
 		if (selection instanceof IStructuredSelection
 				&& ((IStructuredSelection) selection).toList().size() > 0) {
 			Object selectedElement = ((IStructuredSelection) selection).toList().get(0);
-			Resource selectedResource = UMLHelper.getResource(selectedElement);
+			Resource selectedResource = ModelObfuscatorUIHelper.getResource(selectedElement);
 			EObject eObject = selectedResource.getContents().get(0);
             if(eObject instanceof Model)
 			    return (Model) eObject;
