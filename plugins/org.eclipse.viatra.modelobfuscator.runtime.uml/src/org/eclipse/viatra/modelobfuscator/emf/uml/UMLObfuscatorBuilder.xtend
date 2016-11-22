@@ -21,7 +21,7 @@ class UMLObfuscatorBuilder extends EMFModelObfuscatorBuilder {
     protected new() {
         super()
         super.salt = ObfuscatorUtil.generateBase36RandomString(4)
-        super.prefix = "o"
+        super.prefix = "oC"
     }
 
     /**

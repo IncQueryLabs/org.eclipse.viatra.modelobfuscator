@@ -56,13 +56,13 @@ class StringObfuscator implements DataTypeObfuscator<String> {
         if (original != null) {
             val salted = salt + original
             val obfuscatedBytes = ObfuscatorUtil.xorWithSeed(salted.bytes, seedNumber)
-            return addPrefix(BaseEncoding.base16.encode(obfuscatedBytes))
+            return addPrefix(BaseEncoding.base32.omitPadding.lowerCase.encode(obfuscatedBytes))
         }
     }
 
     override restoreData(String obfuscated) {
         if (obfuscated != null) {
-            val obfuscatedBytes = BaseEncoding.base16.decode(removePrefix(obfuscated))
+            val obfuscatedBytes = BaseEncoding.base32.omitPadding.lowerCase.decode(removePrefix(obfuscated))
             val salted = new String(ObfuscatorUtil.xorWithSeed(obfuscatedBytes, seedNumber))
             return salted.substring(salt.length)
         }
