@@ -11,6 +11,7 @@
 package org.eclipse.viatra.modelobfuscator.util
 
 import com.google.common.base.Preconditions
+import com.google.common.hash.Hashing
 import com.google.common.io.BaseEncoding
 import java.math.BigInteger
 import org.eclipse.viatra.modelobfuscator.api.DataTypeObfuscator
@@ -26,6 +27,7 @@ class StringObfuscator implements DataTypeObfuscator<String> {
     private String prefix
     private byte[] seedNumber
     private val coder = BaseEncoding.base32.omitPadding.lowerCase
+    private int baseOffset
 
     @Deprecated
     new(String seed, String salt) {
@@ -41,6 +43,8 @@ class StringObfuscator implements DataTypeObfuscator<String> {
         this.seedNumber = seed.bytes
         this.salt = salt
         this.prefix = prefix
+        val offsetHash = Hashing.md5.newHasher.putUnencodedChars(seed).putUnencodedChars(salt).putUnencodedChars(prefix).hash
+        this.baseOffset = offsetHash.asInt%seedNumber.length 
     }
 
     new(BigInteger seed, String salt, String prefix) {
@@ -51,12 +55,15 @@ class StringObfuscator implements DataTypeObfuscator<String> {
         this.seedNumber = seed.toByteArray.tail
         this.salt = salt
         this.prefix = prefix
+        val offsetHash = Hashing.md5.newHasher.putBytes(seedNumber).putUnencodedChars(salt).putUnencodedChars(prefix).hash
+        this.baseOffset = Math.abs(offsetHash.asInt % (seedNumber.length))
     }
 
     override obfuscateData(String original) {
         if (original != null) {
             val salted = salt + original
-            val obfuscatedBytes = ObfuscatorUtil.xorWithSeed(salted.bytes, seedNumber, salted.bytes.length)
+            val offset = salted.bytes.length + baseOffset
+            val obfuscatedBytes = ObfuscatorUtil.xorWithSeed(salted.bytes, seedNumber, offset)
             return addPrefix(coder.encode(obfuscatedBytes))
         }
     }
@@ -64,7 +71,8 @@ class StringObfuscator implements DataTypeObfuscator<String> {
     override restoreData(String obfuscated) {
         if (obfuscated != null) {
             val obfuscatedBytes = coder.decode(removePrefix(obfuscated))
-            val salted = new String(ObfuscatorUtil.xorWithSeed(obfuscatedBytes, seedNumber, obfuscatedBytes.length))
+            val offset = obfuscatedBytes.length + baseOffset
+            val salted = new String(ObfuscatorUtil.xorWithSeed(obfuscatedBytes, seedNumber, offset))
             Preconditions.checkState(salted.startsWith(salt),"Salt %s does not match in %s",salt,obfuscated)
             return salted.substring(salt.length)
         }
