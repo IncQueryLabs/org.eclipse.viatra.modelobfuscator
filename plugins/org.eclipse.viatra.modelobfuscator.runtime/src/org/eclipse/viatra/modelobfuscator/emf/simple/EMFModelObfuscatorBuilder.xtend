@@ -26,7 +26,7 @@ import java.math.BigInteger
  * the {@link StringObfuscator}, thus supporting reproducibility and restoration.
  * 
  * <p/>The default value of the seed is a random, 32 character long, base36 string created by
- * {@link ObfuscatorUtil#generateBase36RandomString}. The default value of the salt is empty.
+ * {@link ObfuscatorUtil#generateBase36RandomString}. The default value of the salt is a random, 4 character long, base36 string.
  * 
  * @author Abel Hegedus
  * 
@@ -35,7 +35,7 @@ class EMFModelObfuscatorBuilder {
 
     private ResourceSet inputRS
     private ResourceFilter filter
-    private String saltString = ""
+    private String saltString = ObfuscatorUtil.generateBase36RandomString(4)
     private BigInteger seedNumber = new BigInteger(ObfuscatorUtil.generateBase36RandomString(32), 36)
     private String prefix = "oC"
     private Map<String, String> obfuscationMap = null

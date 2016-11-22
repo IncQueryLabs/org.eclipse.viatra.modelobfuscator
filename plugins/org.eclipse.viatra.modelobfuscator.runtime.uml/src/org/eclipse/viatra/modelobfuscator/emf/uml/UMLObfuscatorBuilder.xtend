@@ -11,7 +11,6 @@
 package org.eclipse.viatra.modelobfuscator.emf.uml
 
 import org.eclipse.viatra.modelobfuscator.emf.simple.EMFModelObfuscatorBuilder
-import org.eclipse.viatra.modelobfuscator.util.ObfuscatorUtil
 
 class UMLObfuscatorBuilder extends EMFModelObfuscatorBuilder {
 
@@ -20,8 +19,6 @@ class UMLObfuscatorBuilder extends EMFModelObfuscatorBuilder {
      */
     protected new() {
         super()
-        super.salt = ObfuscatorUtil.generateBase36RandomString(4)
-        super.prefix = "oC"
     }
 
     /**
