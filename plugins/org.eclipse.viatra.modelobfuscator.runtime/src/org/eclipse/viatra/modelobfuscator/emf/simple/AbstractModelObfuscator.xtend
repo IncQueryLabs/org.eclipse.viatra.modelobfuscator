@@ -11,15 +11,16 @@
  *******************************************************************************/
 package org.eclipse.viatra.modelobfuscator.emf.simple
 
+import com.google.common.base.Preconditions
 import java.util.Map
+import org.eclipse.emf.common.util.EList
+import org.eclipse.emf.ecore.EAttribute
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.viatra.modelobfuscator.api.ModelObfuscator
 import org.eclipse.viatra.modelobfuscator.util.StringObfuscator
-import com.google.common.base.Preconditions
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.emf.common.util.EList
-import org.eclipse.emf.ecore.resource.Resource
 
 abstract class AbstractModelObfuscator implements ModelObfuscator {
   protected ResourceSet inputResourceSet
@@ -46,10 +47,7 @@ abstract class AbstractModelObfuscator implements ModelObfuscator {
       EcoreUtil.getAllContents(it, true).filter(EObject).forEach [ obj |
         // only attributes modified
         obj.eClass.EAllAttributes.filter [
-          // we don't need (or can't) to modify such attributes
-          changeable && !derived && !volatile &&
-          // the value must be String then
-          EAttributeType.instanceClass == String
+          filterAttribute(it)
         ].forEach [
           val old = obj.eGet(it)
           if (many) {
@@ -70,7 +68,14 @@ abstract class AbstractModelObfuscator implements ModelObfuscator {
       ]
     ]
   }
-  
+
+  protected def boolean filterAttribute(EAttribute eAttribute) {
+    // we don't need (or can't) to modify such attributes
+    eAttribute.changeable && !eAttribute.derived && !eAttribute.volatile &&
+    // the value must be String then
+    eAttribute.EAttributeType.instanceClass == String
+  }
+
   protected def String modifyData(String data, boolean obfuscate)
 
   /**
