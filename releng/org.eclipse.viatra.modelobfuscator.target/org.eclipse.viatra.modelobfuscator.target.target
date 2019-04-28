@@ -24,7 +24,7 @@
       <repository location="http://download.eclipse.org/modeling/mdt/uml2/updates/5.0/R201502020947"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.license.feature.group" version="1.0.1.v20140414-1359"/>
+      <unit id="org.eclipse.license.feature.group" version="2.0.1.v20180423-1114"/>
       <repository location="http://download.eclipse.org/cbi/updates/license"/>
     </location>
   </locations>
